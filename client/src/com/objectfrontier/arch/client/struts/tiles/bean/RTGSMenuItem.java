@@ -27,8 +27,15 @@ extends MenuItem {
     private String trantype;
     private String status;
     private String subtype;
+    private String test;
 
-    /**
+    public String getTest() {
+		return test;
+	}
+	public void setTest(String test) {
+		this.test = test;
+	}
+	/**
      * Return String representation.
      */
     public String toString() {

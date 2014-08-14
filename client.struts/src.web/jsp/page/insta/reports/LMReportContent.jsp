@@ -33,6 +33,7 @@ String imagePath = imageBase + "/print.jpg";
             <td align ="right"><nested:message key="label.equal"/></td>
             <td align = "right">
                 <nested:define id="creditSettAmt" property="creditAmt" type="java.lang.String"/>
+                <% out.println("Credut Settlement Amt >> "); %>
                 <% out.println(FormatAmount.formatINRAmount(creditSettAmt)); %>
             </td>
         </tr>

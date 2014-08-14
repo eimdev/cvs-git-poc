@@ -46,7 +46,7 @@ String imagePath = imageBase + "/print.jpg";
                 <% int sno  = index.intValue()+1; %>
                 <td align="center" width="5%"><%=sno%></td>
                 <td align="left">
-                <nested:write property = "ifsc"/>
+                IFSC >> <nested:write property = "ifsc"/>
                 </td>
                 <td align="left">
                 <nested:write property = "branchName"/>

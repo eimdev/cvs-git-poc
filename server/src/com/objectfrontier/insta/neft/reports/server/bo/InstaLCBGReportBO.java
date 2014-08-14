@@ -50,6 +50,7 @@ extends InstaReportBO {
     public static final String OUTWARD_TRANSACTION_TYPE = "outward";
     public static final String INWARD_TRANSACTION_TYPE = "inward";
     public static final String BANKNAME = InstaDefaultConstants.BANKNAME;
+    public static final String BANKNAMETEST = "Test";
 
     /** Constants added for Levy Charge Reports */
     //Starts

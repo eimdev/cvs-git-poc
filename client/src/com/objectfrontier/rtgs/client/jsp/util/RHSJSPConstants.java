@@ -567,4 +567,6 @@ extends com.objectfrontier.arch.client.jsp.util.JSPConstants,
    String LIQUIDITY_MGT_REPORTS = "Liquidity Management Reports -";
    String FORWARD_LMREPORTS = "forwardlmreports";
    String FORWARD_LM_FAILURE = "lmfailure";
+   
+   String TEST_FORWARD = "Test";
 }

@@ -354,4 +354,8 @@ public class ConversionUtils {
 
         return getRootExceptionMessage(th);
     }
+    
+    public static String display() {
+    	return "Test";
+    }
 }
