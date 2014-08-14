@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="insta.webinf.classes" path="client/src"/>
+	<classpathentry kind="src" output="insta.webinf.classes" path="client/res"/>
+	<classpathentry kind="src" output="insta.webinf.classes" path="client.struts/src"/>
+	<classpathentry kind="src" output="insta.webinf.classes" path="client.struts/res"/>
+	<classpathentry kind="src" output="insta" path="client.struts/src.web"/>
+	<classpathentry kind="src" output="insta.webinf.classes" path="api/src"/>
+	<classpathentry kind="src" path="server.j2ee/src"/>
+	<classpathentry kind="src" path="server.j2ee/res"/>
+	<classpathentry kind="src" output="insta.webinf.lib" path="lib"/>
+	<classpathentry kind="src" path="server/res"/>
+	<classpathentry kind="src" path="server/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/insta.workflow"/>
+	<classpathentry kind="lib" path="lib/log4j.jar"/>
+	<classpathentry kind="lib" path="lib/jwrap.ee.jar"/>
+	<classpathentry kind="lib" path="lib/of-descriptor.jar"/>
+	<classpathentry kind="lib" path="lib/ofs.arch.jar"/>
+	<classpathentry kind="lib" path="lib/ofs.arch.server.jar"/>
+	<classpathentry kind="lib" path="lib/ofs.arch.server.web.jar"/>
+	<classpathentry kind="lib" path="lib/struts.jar"/>
+	<classpathentry kind="lib" path="D:/dev/ofs/insta/insta.reports/lib/jboss-j2ee.jar"/>
+	<classpathentry kind="lib" path="D:/dev/ofs/insta/insta.reports/lib/servlet-api-2.3.jar"/>
+	<classpathentry kind="lib" path="lib/enunciate-full-1.7.jar"/>
+	<classpathentry kind="lib" path="lib/ums.ws-client-1.5.jar" sourcepath="lib/ums.ws-client-1.5-src.jar"/>
+	<classpathentry kind="lib" path="lib/poi-2.5.1-final-20040804.jar"/>
+	<classpathentry kind="lib" path="lib/insta.workflow.bean.jar"/>
+	<classpathentry kind="lib" path="lib/insta.workflow.neft.bean.jar"/>
+	<classpathentry kind="lib" path="/insta.workflow/lib/jfreechart-1.0.0-rc1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
