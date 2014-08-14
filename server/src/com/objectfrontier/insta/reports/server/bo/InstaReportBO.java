@@ -173,5 +173,8 @@ extends InstaBO {
     }
     
     
+    private String displayTest() {
+    	return "test";
+    }
 
 }
