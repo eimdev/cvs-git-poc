@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<!--
+     This is the Struts configuration file for the application
+-->
+
+<struts-config>
+
+  <!-- ========== Form Bean Definitions =================================== -->
+
+	<form-beans>
+        <form-bean name="instaReportBean" type="com.objectfrontier.insta.rtgs.reports.bean.InstaReportBean"/>
+
+        <form-bean name="reportForm" type="com.objectfrontier.insta.rtgs.reports.bean.ReportBean"/>
+
+        <form-bean name="neftReportBean" type="com.objectfrontier.insta.neft.reports.bean.InstaNEFTReportBean"/>
+		<!-- LCBG Report Start  - Joe -->
+		<form-bean name="lcbgReportBean" type="com.objectfrontier.insta.lcbg.reports.bean.InstaLCBGReportBean"/>
+		<!-- LCBG Report End  - Joe -->
+   </form-beans>
+
+  <!-- ========== Global Exception Definitions ============================ -->
+
+    <global-exceptions/>
+
+  <!-- ========== Global Forward Definitions ============================== -->
+    <global-forwards>
+        <forward name="sessionexpired" 	path="/insta/sessionExpired.do" contextRelative="true" redirect="true"/>
+        <forward name="sessionInvalid" 	path="session.expired.page" contextRelative="true" redirect="true"/>
+    </global-forwards>
+
+  <!-- ========== Action Mapping Definitions ============================== -->
+
+    <action-mappings>
+
+		<!-- Reports -->
+		<!-- Reports Welcome Page -->
+        <action path     = "/reports"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.AbstractReportAction">
+            <forward name = "success" path = "insta.reports.welcome.page"/>
+        </action>
+
+		<!-- Customer Payments Submitted Report [R41-Outward Report] -->
+        <action path     = "/r41outwardreport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.R41OutwardReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "input" path = "insta.report.r41outward.inputpage"/>
+            <forward name = "viewreport" path = "insta.report.r41outward.viewpage"/>
+        </action>
+
+		<!-- Customer Payments Received Report [R41-Inward Report] -->
+        <action path     = "/r41inwardreport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.R41InwardReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "input" path = "insta.report.r41inward.inputpage"/>
+            <forward name = "viewreport" path = "insta.report.r41inward.viewpage"/>
+        </action>
+
+		<!-- InterBank Payments Submitted Report [R42-Outward Report] -->
+        <action path     = "/r42outwardreport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.R42OutwardReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "input" path = "insta.report.r42outward.inputpage"/>
+            <forward name = "viewreport" path = "insta.report.r42outward.viewpage"/>
+        </action>
+
+		<!-- InterBank Payments Received Report [R42-Inward Report] -->
+        <action path     = "/r42inwardreport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.R42InwardReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "input" path = "insta.report.r42inward.inputpage"/>
+            <forward name = "viewreport" path = "insta.report.r42inward.viewpage"/>
+        </action>
+
+		<!-- RTGS Reconcillation Report -->
+        <action path     = "/reconcillationreport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.RTGSReconcillationReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "input" path = "insta.report.reconcillation.inputpage"/>
+            <forward name = "viewreport" path = "insta.report.reconcillation.viewpage"/>
+        </action>
+
+		<!-- RTGS Inward Return Report -->
+        <action path     = "/inwardreturnreport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.InwardReturnReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "input" path = "insta.report.inwardreturn.inputpage"/>
+            <forward name = "viewreport" path = "insta.report.inwardreturn.viewpage"/>
+        </action>
+		<!-- Graduated Payment Report -->
+        <action path     = "/graduatedReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.GraduatedPaymentReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+			<forward name = "input" path = "insta.report.gpr.inputpage"/>
+            <forward name = "list"  path = "insta.report.gpr.listpage"/>
+        </action>
+        <!-- VIJB - Reports Input Page -->
+        <action path     = "/reportInput"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.ReportInputAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "tranDetailsReport" path = "insta.vijb.report.tranDetailsReport.input"/>
+            <forward name = "brIndReport" path = "insta.vijb.report.brIndReport.input"/>
+            <forward name = "brSummReport" path = "insta.vijb.report.brSummReport.input"/>
+            <forward name = "brInwardReturned" path = "insta.vijb.report.brInwReturned.input"/>
+            <forward name = "brOutwardReturned" path = "insta.vijb.report.brOutReturned.input"/>
+            <forward name = "brInwardBankwise" path = "insta.vijb.report.brInwBankwise.input"/>
+            <forward name = "brOutwardBankwise" path = "insta.vijb.report.brOutBankwise.input"/>
+            <forward name = "utrNoWise" path = "insta.vijb.report.utrNoWise.input"/>
+            <forward name = "cpWiseReconcilliation" path = "insta.vijb.report.cpWiseReconcilliation.input"/>
+            <forward name = "brWiseReconcilliation" path = "insta.vijb.report.brWiseReconcilliation.input"/>
+            <forward name = "brInwRejectedByUser" path = "insta.vijb.report.brInwRejectedByUser.input"/>
+            <forward name = "brSubTypeIndividual" path = "insta.vijb.report.brSubTypeIndividual.input"/>
+            <forward name = "owReturnedReport"    path = "insta.vijb.report.owReturnedReport.input"/>
+            <forward name = "futureDatedTxnsReport"    path = "insta.vijb.report.futureDatedTxns.input"/>
+            <forward name = "exceptionReport"    path = "insta.vijb.report.exceptionReport.input"/>
+            <forward name = "returnPaymentRejectedReport"    path = "insta.vijb.report.returnPaymentRejectedReport.input"/>
+            <forward name = "unsuccessfulPaymentReport"    path = "insta.vijb.unsuccessfulPaymentReport.input"/>
+			<!--RTGS Beneficiary Account Details - Starts-->
+			<forward name = "RtgsBeneficiaryAccountDetails"    path = "insta.rtgs.beneficiaryaccountdetails.input"/>
+			<!--RTGS Beneficiary Account Details - Starts-->
+
+        </action>
+        <!-- VIJB - Transaction Details Reports Details Page -->
+        <action path     = "/tranDetailsReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.TXNDetailsReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.tranDetailsReport.details"/>
+        </action>
+        <!-- VIJB - Branch Individual Reports Details Page -->
+        <action path     = "/brIndividualReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.BrIndividualReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.brIndReport.details"/>
+        </action>
+        <!-- VIJB - Branch Summary Reports Details Page -->
+        <action path     = "/brSummaryReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.BrSummaryReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.brSummReport.details"/>
+        </action>
+        <!-- VIJB - Branch Inward Returned Reports Details Page -->
+        <action path     = "/brInwardReturnedReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.BrInwardReturnedReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.brInwReturned.details"/>
+        </action>
+        <!-- VIJB - Branch Outward Returned Reports Details Page -->
+        <action path     = "/brOutwardReturnedReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.BrOutReturnedByUserReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.brOutReturned.details"/>
+        </action>
+        <!-- VIJB - Inward Bank wise Reports Details Page -->
+        <action path     = "/brInwardBankwiseReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.BrInwardBankwiseReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.brInwBankwise.details"/>
+        </action>
+        <!-- VIJB - Outward Bank wise Reports Details Page -->
+        <action path     = "/brOutwardBankwiseReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.BrOutwardBankwiseReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.brOutBankwise.details"/>
+        </action>
+        <!-- VIJB - Outward Returned Reports Details Page -->
+        <action path     = "/owReturnedReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.OutwardReturnedReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.owReturnedReport.details"/>
+        </action>
+        <!-- VIJB - UTRNo wise Reports Details Page -->
+        <action path     = "/utrNoWiseReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.UTRNoWiseReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.utrNoWise.details"/>
+        </action>
+        <!-- VIJB - Counter Party Wise Reconcilliation Reports Details Page -->
+        <action path     = "/cpWiseReconcilliationReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.CPwiseReconcilliationReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.cpWiseReconcilliation.details"/>
+        </action>
+        <!-- VIJB - Branch Wise Reconcilliation Reports Details Page -->
+        <action path     = "/brWiseReconcilliationReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.BranchwiseReconcillationReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.brWiseReconcilliation.details"/>
+        </action>
+        <!-- VIJB - Branch Wise Inward Rejected By User Reports Details Page -->
+        <action path     = "/brInwRejectedByUserReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.BrInwRejectedByUserlReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.brInwRejectedByUser.details"/>
+            <forward name = "brInwRejectedByUser" path = "insta.vijb.report.brInwRejectedByUser.input"/>
+        </action>
+
+        <!-- VIJB - Future Dated Txns Report Details Page -->
+        <action path     = "/futureDatedTxnsReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.FutureDatedTxnsReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.futureDatedTxns.details"/>
+        </action>
+
+        <!-- VIJB - Exceptions Report Details Page -->
+        <action path     = "/exceptionReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.ExceptionReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.exceptionReport.details"/>
+        </action>
+
+         <!-- VIJB - Inward Possible Return Payment Rejected by User Report Details Page -->
+        <action path     = "/returnPaymentRejectedReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.ReturnPaymentRejectedReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.returnPaymentRejectedReport.details"/>
+            <forward name = "returnPaymentRejectedReport" path = "insta.vijb.report.returnPaymentRejectedReport.input"/>
+        </action>
+
+        <!-- VIJB - Unsuccessful Payment Report Page -->
+        <action path     = "/unsuccessfulPaymentReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.UnsuccessfulPaymentReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.unsuccessfulPaymentReport.details"/>
+        </action>
+
+        <!--VIJB NEFT Reconcillation Report -->
+        <action path     = "/neftReconcilliation"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTReconciliationReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "input" path = "insta.neft.report.reconcillation.inputpage"/>
+            <forward name = "viewreport" path = "insta.neft.report.reconcillation.viewpage"/>
+        </action>
+        <action path="/submitDayEndReport"
+                type="com.objectfrontier.insta.rtgs.reports.action.DayEndReportAction"
+                name="instaReportBean"
+	        	scope="session"
+	        	validate="false">
+	            <forward name="forwardInward"	path="insta.report.dayend.inward"/>
+                <forward name="forwardOutward"	path="insta.report.dayend.outward"/>
+                <forward name="failureInward"	path="insta.report.dayend.inward"/>
+                <forward name="failureOutward"  path="insta.report.dayend.outward"/>
+        </action>
+        <action path="/submitLMReport"
+                type="com.objectfrontier.insta.rtgs.reports.action.LMReportAction"
+                name="instaReportBean"
+	           	scope="session"
+	           	validate="false">
+                <forward name="forwardlmreports"	path="insta.liquidity.report"/>
+                <forward name="lmfailure"           path="insta.liquidity.report"/>
+        </action>
+
+        <action path="/submitExcelReport"
+                type="com.objectfrontier.insta.rtgs.reports.action.ExcelReportSubmitAction"
+                name="instaReportBean"
+	           	scope="session"
+	           	validate="false">
+                <forward name="controllerInput"	path="insta.report.excel.controller.inputpage"/>
+                <forward name="excelSubmit"	path="insta.report.excel.controller.submitpage"/>
+                <forward name="controllerFailure"	path="insta.report.excel.controller.inputpage"/>
+        </action>
+
+        <!-- VIJB - Branch Wise SubType Individual Report-->
+        <action path     = "/brSubTypeIndividualReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.BrSubtypeIndividualReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.brSubTypeIndividual.details"/>
+        </action>
+
+        <!-- BOR Reports -->
+        					<!-- Branch and Controller Reports -->
+        <action path="/submitReport"
+	           	type="com.objectfrontier.insta.rtgs.reports.action.ReportSubmitAction"
+	           	name="reportForm"
+	           	scope="session"
+	           	validate="false">
+		        <forward name="branchIndividual"				path="rhs.report.branch.all.individual"/>
+			    <forward name="branchInput"						path="rhs.report.branch.input"/>
+				<forward name="branchAllIndividual"				path="rhs.report.branch.all.individual"/>
+	  			<forward name="branchSuccessIndividual"			path="rhs.report.branch.success.individual"/>
+	  			<forward name="branchUnSuccessIndividual"		path="rhs.report.branch.unsuccess.individual"/>
+	  			<forward name="branchReturnIndividual"			path="rhs.report.branch.return.individual"/>
+
+	  			<!-- RBC CMD 1.0 Starts -->
+	  			<forward name="branchcancelIndividual"			path="rhs.report.branch.cancel.individual"/>
+	  			<forward name="branchutrNumberwiseIndividual"	path="rhs.report.branch.utr.individual"/>
+	  			<forward name="branchtimedoutIndividual"		path="rhs.report.branch.timedout.individual"/>
+				<!-- RBC CMD 1.0 Ends -->
+
+				<forward name="branchAllConsolidated"			path="rhs.report.branch.all.consolidated"/>
+				<forward name="branchSuccessConsolidated"		path="rhs.report.branch.success.consolidated"/>
+				<forward name="branchUnSuccessConsolidated"		path="rhs.report.branch.unsuccess.consolidated"/>
+				<forward name="branchReturnConsolidated"		path="rhs.report.branch.return.consolidated"/>
+
+				<!-- RBC CMD 1.0 Starts -->
+				<forward name="branchcancelConsolidated"		path="rhs.report.branch.cancel.consolidated"/>
+				<forward name="branchutrNumberwiseConsolidated"	path="rhs.report.branch.utr.consolidated"/>
+				<forward name="branchtimedoutConsolidated"		path="rhs.report.branch.timedout.consolidated"/>
+				<!-- RBC CMD 1.0 Ends -->
+
+				<forward name="branchAllDetailedView"			path="rhs.report.branch.all.detailView"/>
+				<forward name="branchSuccessDetailedView"		path="rhs.report.branch.success.detailView"/>
+				<forward name="branchUnSuccessDetailedView"		path="rhs.report.branch.unsuccess.detailView"/>
+				<forward name="branchReturnDetailedView"		path="rhs.report.branch.return.detailView"/>
+
+				<!-- RBC CMD 1.0 Starts -->
+				<forward name="branchcancelDetailedView"		path="rhs.report.branch.cancel.detailView"/>
+				<forward name="branchutrNumberwiseDetailedView"	path="rhs.report.branch.utr.detailView"/>
+				<forward name="branchtimedoutDetailedView"		path="rhs.report.branch.timedout.detailView"/>
+				<!-- RBC CMD 1.0 Ends -->
+
+				<forward name="controllerInput"					path="rhs.report.controller.input"/>
+				<forward name="controllerAllIndividual"					path="rhs.report.controller.all.individual"/>
+				<forward name="controllerSuccessIndividual"				path="rhs.report.controller.success.individual"/>
+	 			<forward name="controllerSuccessBranchIndividual"		path="rhs.report.controller.successBranch.individual"/>
+				<forward name="controllerUnSuccessIndividual"			path="rhs.report.controller.unsuccess.individual"/>
+				<forward name="controllerUnSuccessBranchIndividual"		path="rhs.report.controller.unsuccessBranch.individual"/>
+				<forward name="controllerDeferredIndividual"			path="rhs.report.controller.deferred.individual"/>
+				<forward name="controllerForOtherBranchIndividual"		path="rhs.report.controller.forOtherBranch.individual"/>
+				<forward name="controllerRedirectedIndividual"			path="rhs.report.controller.redirected.individual"/>
+				<forward name="controllerReturnIndividual"				path="rhs.report.controller.return.individual"/>
+
+				<!-- RBC CMD 1.0 Starts -->
+				<forward name="controllercancelIndividual"				path="rhs.report.controller.cancel.individual"/>
+				<forward name="controllerutrNumberwiseIndividual"		path="rhs.report.controller.utr.individual"/>
+				<forward name="controllertimedoutIndividual"			path="rhs.report.controller.timedout.individual"/>
+				<!-- RBC CMD 1.0 Ends -->
+
+				<forward name="controllerAllConsolidated"				path="rhs.report.controller.all.consolidated"/>
+				<forward name="controllerSuccessConsolidated"			path="rhs.report.controller.success.consolidated"/>
+				<forward name="controllerSuccessBranchConsolidated"		path="rhs.report.controller.successBranch.consolidated"/>
+				<forward name="controllerUnSuccessConsolidated"			path="rhs.report.controller.unsuccess.consolidated"/>
+				<forward name="controllerUnSuccessBranchConsolidated"	path="rhs.report.controller.unsuccessBranch.consolidated"/>
+				<forward name="controllerDeferredConsolidated"			path="rhs.report.controller.deferred.consolidated"/>
+				<forward name="controllerForOtherBranchConsolidated"	path="rhs.report.controller.forOtherBranch.consolidated"/>
+				<forward name="controllerRedirectedConsolidated"		path="rhs.report.controller.redirected.consolidated"/>
+				<forward name="controllerReturnConsolidated"			path="rhs.report.controller.return.consolidated"/>
+				<!-- RBC CMD 1.0 Starts -->
+				<forward name="controllercancelConsolidated"			path="rhs.report.controller.cancel.consolidated"/>
+				<forward name="controllerutrNumberwiseConsolidated"		path="rhs.report.controller.utr.consolidated"/>
+				<forward name="controllertimedoutConsolidated"			path="rhs.report.controller.timedout.consolidated"/>
+				<!-- RBC CMD 1.0 Ends -->
+
+				<forward name="controllerAllDetailedView"				path="rhs.report.controller.all.detailView"/>
+				<forward name="controllerSuccessDetailedView"			path="rhs.report.controller.success.detailView"/>
+				<forward name="controllerSuccessBranchDetailedView"		path="rhs.report.controller.successBranch.detailView"/>
+				<forward name="controllerUnSuccessDetailedView"			path="rhs.report.controller.unsuccess.detailView"/>
+				<forward name="controllerUnSuccessBranchDetailedView"	path="rhs.report.controller.unsuccessBranch.detailView"/>
+				<forward name="controllerDeferreddDetailedView"			path="rhs.report.controller.deferred.detailView"/>
+				<forward name="controllerForOtherBranchDetailedView"	path="rhs.report.controller.forOtherBranch.detailView"/>
+				<forward name="controllerRedirectedDetailedView"		path="rhs.report.controller.redirected.detailView"/>
+				<forward name="controllerReturnDetailedView"			path="rhs.report.controller.return.detailView"/>
+				<!-- RBC CMD 1.0 Starts -->
+				<forward name="controllercancelDetailedView"			path="rhs.report.controller.cancel.detailView"/>
+				<forward name="controllerutrNumberwiseDetailedView"		path="rhs.report.controller.utr.detailView"/>
+				<forward name="controllertimedoutDetailedView"			path="rhs.report.controller.timedout.detailView"/>
+				<!-- RBC CMD 1.0 Ends -->
+				<forward name="branchFailure"		path="rhs.report.branch.input"/>
+				<forward name="controllerFailure"	path="rhs.report.controller.input"/>
+				<forward name="viewxsl" path="rhs.report.viewxsl"/>
+		</action>
+
+        <!-- Controller Report for Consolidated All -->
+        <action path="/submitControllerReport"
+                type="com.objectfrontier.insta.rtgs.reports.action.ReportSubmitActionController"
+                name="reportForm"
+	           	scope="session"
+	           	validate="false">
+                <forward name="controllerInput"	path="rhs.controller.input"/>
+                <forward name="controllerSubmit" path="rhs.controller.submit"/>
+                <forward name="controllerFailure"	path="rhs.controller.input"/>
+                <forward name="forwardConsolidated" path="rhs.consolidated.submit"/>
+                <forward name="consolidatedInput" path="rhs.consolidated.input"/>
+        </action>
+
+        <!-- Controller Report for Typewise -->
+        <action path="/report"
+	           	type="com.objectfrontier.rtgs.report.client.action.ReportAction"
+	           	name="reportForm"
+	           	scope="session"
+	           	validate="false">
+			<forward name="print"	path="rhs.report.input"/>
+			<forward name="view"	path="rhs.report.input"/>
+			<forward name="failure"	path="rhs.report.input"/>
+		</action>
+
+        <!-- NEFT Report Input page -->
+        <action path     = "/neftReportInput"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTReportInputAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "neftinwardSummaryReport" path = "insta.vijb.report.neftinwardSummaryReport.input"/>
+            <forward name = "neftoutwardSummaryReport" path = "insta.vijb.report.neftoutwardSummaryReport.input"/>
+            <forward name = "NeftOutwardTxnDetailsReport" path = "insta.vijb.report.NeftOutwardTxnDetailsReport.input"/>
+            <forward name = "neftPaymentSubmittedReport"       path = "insta.vijb.report.neftPaymentSubmittedReport.input"/>
+            <forward name = "neftPaymentReceivedReport"       path = "insta.vijb.report.neftPaymentReceivedReport.input"/>
+			<forward name = "neftBrInwReturnedReport" path = "insta.vijb.neft.report.neftBrInwReturned.input"/>
+			<forward name = "neftBatchwiseAggregateReport" path = "insta.vijb.report.neftBatchwiseAggregateReport.input"/>
+			<forward name = "neftBatchwiseReconcillationReport" path = "insta.vijb.report.neftBatchwiseReconcillationReport.input"/>
+			<forward name = "neftGraduatedPaymentReport" path = "insta.vijb.report.neftGraduatedPaymentReport.input"/>
+			<forward name = "neftOwReturnedReport"    path = "insta.vijb.report.neftOwReturnedReport.input"/>
+            <forward name = "neftInwardTxnsReport"    path = "insta.vijb.report.neftInwardTxnsReport.input"/>
+            <forward name = "neftRtgsNetSettlementReport" path="insta.vijb.report.neftRtgsNetSettlement.input"/>
+            <forward name = "neftCPWiseReconcilliationReport"    path = "insta.vijb.report.CPWiseReconcilliationReport.input"/>
+            <forward name = "neftUtrNoWise"    path = "insta.vijb.report.neftUtrNoWise.input"/>
+            <forward name = "neftFutureDatedTxnsReport"    path = "insta.vijb.report.neftFutureDateTxnsReport.input"/>
+            <forward name = "neftExceptionsReport"    path = "insta.vijb.report.neftExceptionsReport.input"/>
+            <forward name = "neftReturnPaymentRejectedReport"    path = "insta.vijb.report.neftReturnPaymentRejectedReport.input"/>
+			<!-- Levy charges report : Start -->
+			<forward name = "InwardBankWiseSummaryReport" path = "insta.vijb.neft.report.inwardbanksummary.input"/>
+			<forward name = "InwardBankDetailReport" path = "insta.vijb.neft.report.inwardBankDetail.input"/>
+			<forward name = "OutwardBankDetailReport" path = "insta.vijb.neft.report.outwardBankDetail.input"/>
+			<forward name = "OutwardSenderSummaryReport" path = "insta.vijb.neft.report.outwardBankSummary.input"/>
+			<!-- Levy charges report : End -->
+			<!--NEFT Beneficiary Account Details, Starts-->
+			<forward name = "NeftBeneficiaryAccountDetails" path = "insta.neft.beneficiaryaccountdetails.input"/>
+			<!--NEFT Beneficiary Account Details, Ends-->
+
+        </action>
+
+		<!-- LCBG Report Input page: Start  - Joe -->
+        <action path     = "/lcbgReportInput"
+                type     = "com.objectfrontier.insta.lcbg.reports.action.LCBGReportInputAction"
+                name     = "lcbgReportBean"
+                scope    = "session"
+                validate = "false">
+			<forward name = "inwardLCBGReportInput" path = "insta.lcbg.inwardReport.input"/>
+			<forward name = "outwardLCBGReportInput" path = "insta.lcbg.outwardReport.input"/>
+		</action>
+		<!-- LCBG Report Input page: End  - Joe  -->
+
+		<!--LCBG Inward Summary Report View Page: Start  - Joe -->
+		<!--LCBGInwardSummaryReportAction-->
+		<action path     = "/lcbgInwardSummaryReport"
+                type     = "com.objectfrontier.insta.lcbg.reports.action.LCBGInwardSummaryReportAction"
+                name     = "lcbgReportBean"
+                scope    = "session"
+                validate = "false">
+			<forward name = "inwardLCBGSummaryReportView" path = "insta.lcbg.inwardSummaryReport.view"/>
+        </action>
+		<!--LCBG Inward Summary Report View Page: End  - Joe -->
+
+		<!--LCBG Outward Summary Report View Page: Start   - Joe -->
+		<action path     = "/lcbgOutwardSummaryReport"
+                type     = "com.objectfrontier.insta.lcbg.reports.action.LCBGOutwardSummaryReportAction"
+                name     = "lcbgReportBean"
+                scope    = "session"
+                validate = "false">
+			<forward name = "outwardLCBGSummaryReportView" path = "insta.lcbg.outwardSummaryReport.view"/>
+        </action>
+		<!--LCBG Outward Summary Report View Page: End  - Joe -->
+
+		<!--RTGS Beneficiary Report View Page: Start  - Joe.M, 20130601 -->
+		<!--RTGSBeneficiaryReportViewAction-->
+		<action path     = "/rtgsBeneficiaryViewReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.RTGSBeneficiaryReportViewAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+			<forward name = "rtgsBeneficiaryReportView" path = "insta.rtgs.beneficiary.report.view"/>
+        </action>
+		<!--RTGS Beneficiary Report View Page: End  - Joe.M, 20130601-->
+		<!--NEFTBeneficiaryReportViewAction-->
+		<action path     = "/neftBeneficiaryViewReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTBeneficiaryReportViewAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+			<forward name = "neftBeneficiaryReportView" path = "insta.neft.beneficiary.report.view"/>
+        </action>
+		<!--NEFT Beneficiary Report View Page: End  - Joe.M, 20130601-->
+
+        <!-- NEFT Inward Summary Report View page -->
+        <action path     = "/neftInwardSummaryReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTInwardSummaryReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.neftinwardSummaryReport.view"/>
+        </action>
+        <action path     = "/neftOutwardSummaryReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTOutwardSummaryReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.neftoutwardSummaryReport.view"/>
+        </action>
+
+		<!-- NEFT Inward Bank wise summary report, 20110802-->
+		<action path     = "/neftInwardBankWiseSummaryReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTInwardBankWiseReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "inwardDetailedreportview" path = "insta.vijb.report.neftInwardBankDetailedReport.view"/>
+			<forward name = "inwardSummaryReportView" path = "insta.vijb.report.neftInwardBankSummaryReport.view"/>
+			<forward name = "outwardDetailedreportview" path = "insta.vijb.report.neftOutwardBankDetailedReport.view"/>
+			<forward name = "outwardSummaryviewreport" path = "insta.vijb.report.neftOutwardBankSummaryReport.view"/>
+        </action>
+
+        <!-- NEFT Branch Inward Returned Report -->
+        <action path     = "/neftBrInwReturnedReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTBrInwardReturnedReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.neft.report.neftBrInwReturned.view"/>
+        </action>
+
+
+
+        <!-- NEFT Payment Report View page -->
+        <action path     = "/neftPaymentReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTPaymentReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "submitviewreport" path = "insta.vijb.report.neftPaymentSubmittedReport.view"/>
+            <forward name = "receiveviewreport" path = "insta.vijb.report.neftPaymentReceivedReport.view"/>
+        </action>
+
+        <!-- NEFT Batch wise Aggregate View page -->
+        <action path     = "/neftBatchwiseAggregateReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTBatchwiseAggregateReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.neftBatchwiseAggregateReport.view"/>
+        </action>
+
+        <!-- NEFT Outward Txn Details Report -->
+        <action path     = "/neftOutwardTxnDetailsReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTOutwardTxnDetailsReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.neftoutwardTxnDetailsReport.view"/>
+        </action>
+
+        <!-- NEFT Batch wise Reconcillation View page -->
+        <action path     = "/neftBatchwiseReconcillationReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTBatchwiseReconcillationReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.neftBatchwiseReconcillationReport.view"/>
+        </action>
+
+         <!-- NEFT Graduated Payment Report View page -->
+        <action path     = "/neftGraduatedPaymentReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTGraduatedPaymentReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.neftGraduatedPaymentReport.view"/>
+            <forward name = "view" path = "insta.vijb.report.neftGraduatedPayment.view"/>
+        </action>
+
+        <!-- NEFT Outward Returned Reports Details Page -->
+        <action path     = "/neftOwReturnedReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTOutwardReturnedReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.neftOwReturnedReport.details"/>
+        </action>
+
+        <!-- NEFT Outward Returned Reports Details Page -->
+        <action path     = "/neftInwardTxnsReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTInwardTxnsReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.neftInwardTxnReport.details"/>
+        </action>
+
+        <!-- RTGS Datewise Graduated Payment Report -->
+        <action path     = "/datewiseGraduatedReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.DateWiseGraduatedPaymentReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+			<forward name = "input" path = "insta.report.datewisegpr.inputpage"/>
+            <forward name = "list"  path = "insta.report.datewisegpr.listpage"/>
+        </action>
+
+        <!-- END - BOR Reports -->
+        <!-- VIJB - NEFT RTGS Net Settlement Report -->
+        <action path     = "/neftRtgsNetSettlement"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTRTGSNetSettlementAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "view" path = "insta.vijb.report.neftRtgsNetSettlement.view"/>
+        </action>
+
+        <!-- VIJB - NEFT CPWiseReconcilliation Report -->
+        <action path     = "/neftCPWiseReconcilliation"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTCPwiseReconcilliationReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.CPWiseReconcilliationReport.view"/>
+        </action>
+
+        <!-- RTGS Inward Possible Return Report -->
+        <action path     = "/rtgsInwardPossibleReturnedReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.RTGSInwardPossibleReturnAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+			<forward name = "input" path = "insta.report.possible.return.inputpage"/>
+            <forward name = "list"  path = "insta.report.possible.return.listpage"/>
+        </action>
+
+		<!-- NEFt Inward Possible Return Report -->
+        <action path     = "/neftInwardPossibleReturnedReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTInwardPossibleReturnAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+			<forward name = "input" path = "insta.report.neftpossible.return.inputpage"/>
+            <forward name = "list"  path = "insta.report.neftpossible.return.listpage"/>
+        </action>
+
+        <!-- VIJB - UTRNo wise Reports Details Page -->
+        <action path     = "/neftUtrNoWiseReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTUTRNoWiseReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.neftUtrNoWise.details"/>
+        </action>
+
+        <!-- VIJB - NEFT Future Dated Txns Reports Details Page -->
+        <action path     = "/neftFutureDatedTxnsReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTFutureDatedTxnsReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.neftFutureDateTxnsReport.details"/>
+        </action>
+
+        <!-- VIJB - NEFT Future Dated Txns Reports Details Page -->
+        <action path     = "/neftExceptionsReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTExceptionsReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.neftExceptionsReport.details"/>
+        </action>
+
+        <!-- VIJB - NEFT Future Dated Txns Reports Details Page -->
+        <action path     = "/neftReturnPaymentRejectedReport"
+                type     = "com.objectfrontier.insta.neft.reports.action.NEFTReturnPaymentRejectedReportAction"
+                name     = "neftReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "viewreport" path = "insta.vijb.report.neftReturnPaymentRejectedReport.details"/>
+            <forward name = "neftReturnPaymentRejectedReport"    path = "insta.vijb.report.neftReturnPaymentRejectedReport.input"/>
+        </action>
+
+         <!-- VIJB - RTGS,NEFT  Event-Alerts Report -->
+        <action path     = "/eventAlertReport"
+                type     = "com.objectfrontier.insta.rtgs.reports.action.EventsAlertsReportAction"
+                name     = "instaReportBean"
+                scope    = "session"
+                validate = "false">
+            <forward name = "select" path = "insta.vijb.report.eventAlertReport.select"/>
+            <forward name = "input" path = "insta.vijb.report.eventAlertReport.input"/>
+            <forward name = "viewauditreport" path = "insta.vijb.report.auditReport.view"/>
+            <forward name = "viewemailreport" path = "insta.vijb.report.emailReport.view"/>
+            <forward name = "viewidlreport" path = "insta.vijb.report.idlReport.view"/>
+            <forward name = "viewSystemEventreport" path = "insta.vijb.report.systemEventReport.view"/>
+        </action>
+
+
+	</action-mappings>
+
+  <!-- ========== Tiles Definitions ======================================= -->
+
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+					  value="/WEB-INF/config/tiles-defs.xml,/WEB-INF/config/reports/tiles-reports-defs.xml"/>
+        <set-property property="moduleAware" value="true"/>
+    </plug-in>
+
+</struts-config>
