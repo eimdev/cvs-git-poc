@@ -28,6 +28,7 @@ extends MenuItem {
     private String status;
     private String subtype;
     private String test;
+    private String testPOC;
 
     public String getTest() {
 		return test;
@@ -103,5 +104,10 @@ extends MenuItem {
     public void setTrantype(String string) {
         trantype = string;
     }
-
+	public String getTestPOC() {
+		return testPOC;
+	}
+	public void setTestPOC(String testPOC) {
+		this.testPOC = testPOC;
+	}    
 }
